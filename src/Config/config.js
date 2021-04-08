@@ -5,7 +5,17 @@ export default {
   scale: {
     mode: Phaser.Scale.NONE,
     autoCenter: Phaser.Scale.CENTER_BOTH,
-    width: 800,
-    height: 600
+    width: 320,
+    height: 240
   },
+  parent: 'content',
+  zoom: 2,
+  pixelArt: true,
+  physics: {
+    default: 'arcade',
+    acrade: {
+      gravity: { y: 0 },
+      debug: true
+    }
+  }
 }
