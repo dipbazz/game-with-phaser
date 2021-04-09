@@ -6,6 +6,7 @@ export default class GameScene extends Phaser.Scene {
   }
 
   create () {
+    this.dragons = ['blueDragon', 'orangeDragon']
     let map = this.make.tilemap({key: 'map'});
     let tiles = map.addTilesetImage('spritesheet', 'tiles');
 
@@ -29,6 +30,7 @@ export default class GameScene extends Phaser.Scene {
     this.physics.add.collider(this.player, obstacles);
 
     this.spawnEnemies();
+    this.physics.add.overlap(this.player, this.spawns, this.onMeetEnemy, false, this);
   }
 
   update () {
@@ -89,14 +91,24 @@ export default class GameScene extends Phaser.Scene {
 
   spawnEnemies () {
     this.spawns = this.physics.add.group({
-      classType: Phaser.GameObjects.Zone
+      classType: Phaser.GameObjects.Image
     });
 
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < 10; i++) {
       let x = Phaser.Math.RND.between(0, this.physics.world.bounds.width);
       let y = Phaser.Math.RND.between(0, this.physics.world.bounds.height);
 
-      this.spawns.create(x, y, 20, 20);
+      let enemy = this.spawns.create(x, y, this.dragons[Math.floor(Math.random() * this.dragons.length)]);
+      this.physics.add.existing(enemy);
     }
+  }
+
+  onMeetEnemy (player, zone) {
+    zone.x = Phaser.Math.RND.between(0, this.physics.world.bounds.width);
+    zone.y = Phaser.Math.RND.between(0, this.physics.world.bounds.height);
+
+    this.cameras.main.shake(300);
+
+    this.scene.switch('Battle');
   }
 }
