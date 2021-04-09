@@ -10,6 +10,8 @@ export default class BattleScene extends Phaser.Scene {
   create () {
     this.cameras.main.setBackgroundColor('rgba(0, 200, 0, 0.5)');
     this.generateCharacter();
+    this.generateActions();
+    this.scene.launch('UI');
 
   }
 
@@ -29,5 +31,9 @@ export default class BattleScene extends Phaser.Scene {
     this.heroes = [warrior, mage];
     this.enemies = [blueDragon, orangeDragon];
     this.units = this.heroes.concat(this.enemies);
+  }
+
+  generateActions () {
+    this.actions = [{type: 'Attack'}]
   }
 }
