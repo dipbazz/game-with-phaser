@@ -6,7 +6,6 @@ export default class ActionsMenu extends Menu {
   }
 
   confirm () {
-    console.log('confirm action menu');
-    this.scene.events.emit('ActionSelected', this.menuItemIndex);
+    this.scene.events.emit('ActionSelected', this.menuItemIndex, this);
   }
 }

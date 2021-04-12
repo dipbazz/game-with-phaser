@@ -36,4 +36,11 @@ export default class BattleScene extends Phaser.Scene {
   generateActions () {
     this.actions = [{type: 'Attack'}]
   }
+
+  startBattle(action, attacker, defender) {
+    console.log(action, attacker, defender);
+    if(action.type === 'Attack') {
+      attacker.attack(defender);
+    }
+  }
 }
