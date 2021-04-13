@@ -1,18 +1,18 @@
-import 'phaser';
+import Phaser from 'phaser';
 
 export default class HealthBar extends Phaser.GameObjects.Graphics {
   constructor(scene, character, value) {
-    super(scene, character.x, character.y)
+    super(scene, character.x, character.y);
     this.value = value;
     this.x = character.x;
     this.y = character.y;
-    this.p = 40/100;
+    this.p = 40 / 100;
 
     this.draw();
     scene.add.existing(this);
   }
 
-  decrease (amount) {
+  decrease(amount) {
     this.value -= amount;
 
     if (this.value < 0) {
@@ -20,10 +20,10 @@ export default class HealthBar extends Phaser.GameObjects.Graphics {
     }
     this.draw();
 
-    return(this.value === 0);
+    return (this.value === 0);
   }
 
-  draw () {
+  draw() {
     this.clear();
 
     //  Health
@@ -37,7 +37,7 @@ export default class HealthBar extends Phaser.GameObjects.Graphics {
     }
 
     if (this.value > 0) {
-      var d = Math.floor(this.p * this.value);
+      const d = Math.floor(this.p * this.value);
       this.fillRoundedRect(-20, -25, d, 3, 2);
     }
   }

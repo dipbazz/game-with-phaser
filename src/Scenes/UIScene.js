@@ -1,4 +1,4 @@
-import 'phaser';
+import Phaser from 'phaser';
 import ActionsMenu from '../Objects/ActionsMenu';
 import EnemiesMenu from '../Objects/EnemiesMenu';
 import HeroesMenu from '../Objects/HeroesMenu';
@@ -10,14 +10,14 @@ export default class UIScene extends Phaser.Scene {
     super('UI');
   }
 
-  create () {
+  create() {
     this.emitter = EventDispatcher.getInstance();
 
     this.addUIGraphics();
-    this.battleScene = this.scene.get('Battle')
+    this.battleScene = this.scene.get('Battle');
     this.menus = this.createMenus(this.battleScene);
     this.selectHeroes(this.menus.heroesMenu);
-    this.heroIndex = -1
+    this.heroIndex = -1;
 
     this.input.keyboard.on('keydown', this.onKeyDown, this);
 
@@ -30,10 +30,10 @@ export default class UIScene extends Phaser.Scene {
   }
 
 
-  onHeroSelected (id = null) {
-    this.heroIndex++;
-    if(this.heroIndex >= this.battleScene.heroes.length)
-      this.heroIndex = 0
+  onHeroSelected() {
+    const alive = this.battleScene.heroes.filter(item => item.living);
+    this.heroIndex += 1;
+    if (this.heroIndex >= alive.length) this.heroIndex = 0;
 
     this.currentMenu = this.menus.heroesMenu;
     this.currentMenu.select(this.heroIndex);
@@ -42,13 +42,13 @@ export default class UIScene extends Phaser.Scene {
     this.currentMenu.select(0);
   }
 
-  onActionSelected (id) {
+  onActionSelected(id) {
     this.selectedAction = id;
     this.currentMenu = this.menus.enemiesMenu;
     this.currentMenu.select(0);
   }
 
-  onEnemySelected (id) {
+  onEnemySelected(id) {
     this.currentMenu = null;
     this.selectedEnemy = id;
     this.menus.heroesMenu.deselect();
@@ -57,12 +57,13 @@ export default class UIScene extends Phaser.Scene {
     this.battleScene.startBattle(
       this.battleScene.actions[this.selectedAction],
       this.battleScene.heroes[this.selectedHero],
-      this.battleScene.enemies[this.selectedEnemy]
+      this.battleScene.enemies[this.selectedEnemy],
     );
   }
 
   selectHeroes(heroesMenu) {
-    const id =Math.floor(Math.random() * this.battleScene.heroes.length);
+    const alive = this.battleScene.heroes.filter(item => item.living);
+    const id = Math.floor(Math.random() * alive.length);
     heroesMenu.select(id);
     heroesMenu.confirm();
     this.selectedHero = id;
@@ -70,7 +71,7 @@ export default class UIScene extends Phaser.Scene {
     this.currentMenu.select(0);
   }
 
-  addUIGraphics () {
+  addUIGraphics() {
     this.graphics = this.add.graphics();
     this.graphics.lineStyle(1, 0xffffff);
     this.graphics.fillStyle(0x031f4c, 1);
@@ -83,23 +84,23 @@ export default class UIScene extends Phaser.Scene {
   }
 
   createMenus(battleScene) {
-    let enemiesMenu = new EnemiesMenu(this, 0, 182);
+    const enemiesMenu = new EnemiesMenu(this, 0, 182);
     enemiesMenu.remap(battleScene.enemies);
 
-    let actionsMenu =  new ActionsMenu(this, 95, 182);
+    const actionsMenu = new ActionsMenu(this, 95, 182);
     actionsMenu.remap(battleScene.actions);
 
-    let heroesMenu =  new HeroesMenu(this, 188, 182);
+    const heroesMenu = new HeroesMenu(this, 188, 182);
     heroesMenu.remap(battleScene.heroes);
 
-    return {enemiesMenu, actionsMenu, heroesMenu};
+    return { enemiesMenu, actionsMenu, heroesMenu };
   }
 
-  onKeyDown (event) {
-    if(this.currentMenu && this.currentMenu.selected) {
-      if(event.code === 'ArrowUp'){
+  onKeyDown(event) {
+    if (this.currentMenu && this.currentMenu.selected) {
+      if (event.code === 'ArrowUp') {
         this.currentMenu.moveSelectionUp();
-      } else if(event.code === 'ArrowDown') {
+      } else if (event.code === 'ArrowDown') {
         this.currentMenu.moveSelectionDown();
       } else if (event.code === 'Space' || event.code === 'ArrowLeft') {
         this.currentMenu.confirm();

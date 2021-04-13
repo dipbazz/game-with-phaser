@@ -1,4 +1,4 @@
-import 'phaser';
+import Phaser from 'phaser';
 import config from './Config/config';
 import BootScene from './Scenes/BootScene';
 import GameScene from './Scenes/GameScene';
@@ -10,18 +10,18 @@ import UIScene from './Scenes/UIScene';
 
 
 class Game extends Phaser.Game {
-    constructor () {
-        super(config);
-        this.scene.add('Boot', BootScene);
-        this.scene.add('Preloader', PreloaderScene);
-        this.scene.add('Title', TitleScene);
-        this.scene.add('Game', GameScene);
-        this.scene.add('Credit', CreditScene);
-        this.scene.add('Battle', BattleScene);
-        this.scene.add('UI', UIScene);
+  constructor() {
+    super(config);
+    this.scene.add('Boot', BootScene);
+    this.scene.add('Preloader', PreloaderScene);
+    this.scene.add('Title', TitleScene);
+    this.scene.add('Game', GameScene);
+    this.scene.add('Credit', CreditScene);
+    this.scene.add('Battle', BattleScene);
+    this.scene.add('UI', UIScene);
 
-        this.scene.start('Boot');
-    }
+    this.scene.start('Boot');
+  }
 }
 
 window.game = new Game();

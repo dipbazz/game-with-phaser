@@ -1,4 +1,4 @@
-import 'phaser';
+import Phaser from 'phaser';
 
 export default {
   type: Phaser.AUTO,
@@ -6,7 +6,7 @@ export default {
     mode: Phaser.Scale.NONE,
     autoCenter: Phaser.Scale.CENTER_BOTH,
     width: 320,
-    height: 240
+    height: 240,
   },
   parent: 'content',
   zoom: 2,
@@ -15,7 +15,7 @@ export default {
     default: 'arcade',
     acrade: {
       gravity: { y: 0 },
-      debug: true
-    }
-  }
-}
+      debug: true,
+    },
+  },
+};

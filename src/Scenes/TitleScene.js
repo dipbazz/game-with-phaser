@@ -1,11 +1,11 @@
-import 'phaser';
+import Phaser from 'phaser';
 
 export default class TitleScene extends Phaser.Scene {
-  constructor () {
+  constructor() {
     super('Title');
   }
 
-  create () {
+  create() {
     console.log('creating a title scene ...');
 
     this.scene.start('Game');

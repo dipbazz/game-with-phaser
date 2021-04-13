@@ -1,11 +1,11 @@
-import 'phaser';
+import Phaser from 'phaser';
 
 export default class CreditScene extends Phaser.Scene {
-  constructor () {
-    super ('Credit');
+  constructor() {
+    super('Credit');
   }
 
-  create () {
+  create() {
     console.log('starting the credit scene');
   }
 }

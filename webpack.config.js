@@ -1,15 +1,14 @@
 const path = require('path');
-const webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: {
-    app: './src/index.js'
+    app: './src/index.js',
   },
 
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: '[name].bundle.js'
+    filename: '[name].bundle.js',
   },
 
   module: {
@@ -20,17 +19,17 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-env']
-          }
-        }
-      }
-    ]
+            presets: ['@babel/preset-env'],
+          },
+        },
+      },
+    ],
   },
 
   devServer: {
     contentBase: path.resolve(__dirname, 'dist'),
     compress: true,
-    liveReload: true
+    liveReload: true,
   },
 
   plugins: [
@@ -38,16 +37,16 @@ module.exports = {
       patterns: [
         {
           from: path.resolve(__dirname, 'src/assets'),
-          to: path.resolve(__dirname, 'dist/assets')
-        }
-      ]
+          to: path.resolve(__dirname, 'dist/assets'),
+        },
+      ],
     }),
   ],
 
   optimization: {
     splitChunks: {
       chunks: 'all',
-      name: 'common'
-    }
-  }
-}
+      name: 'common',
+    },
+  },
+};
