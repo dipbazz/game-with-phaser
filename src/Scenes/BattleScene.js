@@ -19,10 +19,10 @@ export default class BattleScene extends Phaser.Scene {
   }
 
   generateCharacter () {
-    let blueDragon = new Enemy(this, 50, 50, 'blueDragon', 1, 'Dragon',  100, 10);
+    let blueDragon = new Enemy(this, 50, 50, 'blueDragon', 1, 'Dragon',  100, 50);
     this.add.existing(blueDragon);
 
-    let orangeDragon = new Enemy(this, 50, 100, 'orangeDragon', 1, 'Dragon2',  100, 13);
+    let orangeDragon = new Enemy(this, 50, 100, 'orangeDragon', 1, 'Dragon2',  100, 50);
     this.add.existing(orangeDragon);
 
     let warrior = new Player(this, 250, 50, 'player', 1, 'Warrior', 100, 20);
@@ -36,7 +36,7 @@ export default class BattleScene extends Phaser.Scene {
     this.units = this.heroes.concat(this.enemies);
   }
 
-  generateActions () {
+generateActions () {
     this.actions = [{type: 'Attack'}]
   }
 
@@ -46,8 +46,12 @@ export default class BattleScene extends Phaser.Scene {
     }
 
     if(attacker instanceof Player){
-      console.log('attacking ', defender.type, ' by ', attacker.type);
-      this.emitter.emit('HeroSelected');
+      console.log(this.scene)
+      this.scene.scene.time.addEvent({delay: 2000, callback:this.counterAttack, callbackScope: this})
+    }
+
+    if(attacker instanceof Enemy) {
+      this.scene.scene.time.addEvent({delay: 2000, callback:this.nextTurn, callbackScope: this})
     }
   }
 
@@ -56,6 +60,10 @@ export default class BattleScene extends Phaser.Scene {
     const action = this.getRandomAction(this.actions);
     const hero = this.getRandomHeroes(this.heroes);
     this.startBattle(action, enemy, hero);
+  }
+
+  nextTurn () {
+    this.emitter.emit('HeroSelected');
   }
 
   getRandomAction(actions) {
