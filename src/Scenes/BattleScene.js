@@ -1,6 +1,7 @@
 import 'phaser';
 import Enemy from '../Models/Enemy';
 import Player from '../Models/Player';
+import EventDispatcher from '../Utility/EventDispatcher';
 
 export default class BattleScene extends Phaser.Scene {
   constructor () {
@@ -8,6 +9,8 @@ export default class BattleScene extends Phaser.Scene {
   }
 
   create () {
+    this.emitter = EventDispatcher.getInstance();
+
     this.cameras.main.setBackgroundColor('rgba(0, 200, 0, 0.5)');
     this.generateCharacter();
     this.generateActions();
@@ -38,9 +41,32 @@ export default class BattleScene extends Phaser.Scene {
   }
 
   startBattle(action, attacker, defender) {
-    console.log(action, attacker, defender);
-    if(action.type === 'Attack') {
+    if(action.type === 'Attack' && defender.living) {
       attacker.attack(defender);
     }
+
+    if(attacker instanceof Player){
+      console.log('attacking ', defender.type, ' by ', attacker.type);
+      this.emitter.emit('HeroSelected', 0);
+    }
+  }
+
+  counterAttack () {
+    const enemy = this.getRandomEnemies(this.enemies);
+    const action = this.getRandomAction(this.actions);
+    const hero = this.getRandomHeroes(this.heroes);
+    this.startBattle(action, enemy, hero);
+  }
+
+  getRandomAction(actions) {
+    return actions[0];
+  }
+
+  getRandomEnemies(enemies) {
+    return enemies[Math.floor(Math.random() * enemies.length)];
+  }
+
+  getRandomHeroes(heroes) {
+    return heroes[Math.floor(Math.random() * heroes.length)];
   }
 }

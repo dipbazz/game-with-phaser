@@ -2,7 +2,7 @@ import 'phaser';
 import ActionsMenu from '../Objects/ActionsMenu';
 import EnemiesMenu from '../Objects/EnemiesMenu';
 import HeroesMenu from '../Objects/HeroesMenu';
-import Menu from '../Objects/Menu';
+import EventDispatcher from '../Utility/EventDispatcher';
 
 export default class UIScene extends Phaser.Scene {
   constructor() {
@@ -10,6 +10,8 @@ export default class UIScene extends Phaser.Scene {
   }
 
   create () {
+    this.emitter = EventDispatcher.getInstance();
+
     this.addUIGraphics();
     this.battleScene = this.scene.get('Battle')
     this.menus = this.createMenus(this.battleScene);
@@ -17,13 +19,18 @@ export default class UIScene extends Phaser.Scene {
 
     this.input.keyboard.on('keydown', this.onKeyDown, this);
 
-    this.events.on('HeroSelected', this.onHeroSelected, this);
-    this.events.on('ActionSelected', this.onActionSelected, this);
-    this.events.on('EnemySelected', this.onEnemySelected, this);
+    this.emitter.on('HeroSelected', this.onHeroSelected, this);
+    this.emitter.on('ActionSelected', this.onActionSelected, this);
+    this.emitter.on('EnemySelected', this.onEnemySelected, this);
   }
 
-  onHeroSelected (id) {
-    console.log(id, 'hero');
+
+  onHeroSelected (id = null) {
+    if(!id) {
+      id = Math.floor(Math.random() * this.battleScene.heroes.length);
+    }
+    this.currentMenu = this.menus.heroesMenu;
+    this.currentMenu.select(id);
     this.selectedHero = id;
     this.currentMenu = this.menus.actionsMenu;
     this.currentMenu.select(0);
@@ -38,6 +45,9 @@ export default class UIScene extends Phaser.Scene {
   onEnemySelected (id) {
     this.currentMenu = null;
     this.selectedEnemy = id;
+    this.menus.heroesMenu.deselect();
+    this.menus.actionsMenu.deselect();
+    this.menus.enemiesMenu.deselect();
     this.battleScene.startBattle(
       this.battleScene.actions[this.selectedAction],
       this.battleScene.heroes[this.selectedHero],
