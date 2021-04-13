@@ -15,7 +15,6 @@ export default class BattleScene extends Phaser.Scene {
     this.generateCharacter();
     this.generateActions();
     this.scene.launch('UI');
-
   }
 
   generateCharacter () {
