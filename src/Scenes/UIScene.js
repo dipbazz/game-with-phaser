@@ -74,22 +74,22 @@ export default class UIScene extends Phaser.Scene {
     this.graphics = this.add.graphics();
     this.graphics.lineStyle(1, 0xffffff);
     this.graphics.fillStyle(0x031f4c, 1);
-    this.graphics.strokeRect(2, 150, 90, 100);
-    this.graphics.fillRect(2, 150, 90, 100);
-    this.graphics.strokeRect(95, 150, 90, 100);
-    this.graphics.fillRect(95, 150, 90, 100);
-    this.graphics.strokeRect(188, 150, 130, 100);
-    this.graphics.fillRect(188, 150, 130, 100);
+    this.graphics.strokeRect(2, 180, 90, 100);
+    this.graphics.fillRect(2, 180, 90, 100);
+    this.graphics.strokeRect(95, 180, 90, 100);
+    this.graphics.fillRect(95, 180, 90, 100);
+    this.graphics.strokeRect(188, 180, 130, 100);
+    this.graphics.fillRect(188, 180, 130, 100);
   }
 
   createMenus(battleScene) {
-    let enemiesMenu = new EnemiesMenu(this, 0, 150);
+    let enemiesMenu = new EnemiesMenu(this, 0, 182);
     enemiesMenu.remap(battleScene.enemies);
 
-    let actionsMenu =  new ActionsMenu(this, 95, 150);
+    let actionsMenu =  new ActionsMenu(this, 95, 182);
     actionsMenu.remap(battleScene.actions);
 
-    let heroesMenu =  new HeroesMenu(this, 188, 150);
+    let heroesMenu =  new HeroesMenu(this, 188, 182);
     heroesMenu.remap(battleScene.heroes);
 
     return {enemiesMenu, actionsMenu, heroesMenu};

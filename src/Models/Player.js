@@ -1,3 +1,4 @@
+import HealthBar from "../Objects/HealthBar";
 import Unit from "./Unit";
 
 export default class Player extends Unit {

@@ -1,12 +1,12 @@
 import 'phaser';
 
 export default class HealthBar extends Phaser.GameObjects.Graphics {
-  constructor(scene, x, y, value) {
-    super(scene, x, y)
+  constructor(scene, character, value) {
+    super(scene, character.x, character.y)
     this.value = value;
-    this.x = x;
-    this.y = y;
-    this.p = 76/100;
+    this.x = character.x;
+    this.y = character.y;
+    this.p = 40/100;
 
     this.draw();
     scene.add.existing(this);
@@ -25,22 +25,20 @@ export default class HealthBar extends Phaser.GameObjects.Graphics {
 
   draw () {
     this.clear();
-    //  BG
-    this.fillStyle(0x000000);
-    this.fillRect(this.x, this.y, 80, 16);
 
     //  Health
     this.fillStyle(0xffffff);
-    this.fillRect(this.x + 2, this.y + 2, 76, 12);
+    this.fillRoundedRect(-20, -25, 40, 3, 2);
 
-    if (this.value < 30) {
+    if (this.value < 40) {
       this.fillStyle(0xff0000);
     } else {
       this.fillStyle(0x00ff00);
     }
 
-    var d = Math.floor(this.p * this.value);
-
-    this.fillRect(this.x + 2, this.y + 2, d, 12);
+    if (this.value > 0) {
+      var d = Math.floor(this.p * this.value);
+      this.fillRoundedRect(-20, -25, d, 3, 2);
+    }
   }
 }

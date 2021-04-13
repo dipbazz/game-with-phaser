@@ -18,16 +18,16 @@ export default class BattleScene extends Phaser.Scene {
   }
 
   generateCharacter () {
-    let blueDragon = new Enemy(this, 50, 50, 'blueDragon', 1, 'Dragon',  100, 50);
+    let blueDragon = new Enemy(this, 50, 80, 'blueDragon', 1, 'Dragon',  100, 8);
     this.add.existing(blueDragon);
 
-    let orangeDragon = new Enemy(this, 50, 100, 'orangeDragon', 1, 'Dragon2',  100, 50);
+    let orangeDragon = new Enemy(this, 50, 130, 'orangeDragon', 1, 'Dragon2',  100, 10);
     this.add.existing(orangeDragon);
 
-    let warrior = new Player(this, 250, 50, 'player', 1, 'Warrior', 100, 20);
+    let warrior = new Player(this, 250, 80, 'player', 1, 'Warrior', 100, 20);
     this.add.existing(warrior);
 
-    let mage = new Player(this, 250, 100, 'player', 4, 'Mage', 80, 8);
+    let mage = new Player(this, 250, 130, 'player', 4, 'Mage', 80, 8);
     this.add.existing(mage);
 
     this.heroes = [warrior, mage];
@@ -45,7 +45,6 @@ generateActions () {
     }
 
     if(attacker instanceof Player){
-      console.log(this.scene)
       this.scene.scene.time.addEvent({delay: 2000, callback:this.counterAttack, callbackScope: this})
     }
 
