@@ -47,7 +47,7 @@ export default class BattleScene extends Phaser.Scene {
 
     if(attacker instanceof Player){
       console.log('attacking ', defender.type, ' by ', attacker.type);
-      this.emitter.emit('HeroSelected', 0);
+      this.emitter.emit('HeroSelected');
     }
   }
 

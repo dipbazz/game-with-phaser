@@ -1,4 +1,5 @@
 import 'phaser';
+import Unit from '../Models/Unit';
 import MenuItem from './MenuItem';
 
 export default class Menu extends Phaser.GameObjects.Container {
@@ -44,12 +45,21 @@ export default class Menu extends Phaser.GameObjects.Container {
   select(index = 0) {
     this.menuItems[this.menuItemIndex].deselect();
     this.menuItemIndex = (index >= this.menuItems.length) ? 0 : index;
+    while(!this.menuItems[this.menuItemIndex].active) {
+      this.menuItemIndex++;
+      if(this.menuItemIndex >= this.menuItems.length)
+        this.menuItemIndex = 0;
+
+      if(this.menuItemIndex == index)
+        return;
+    }
     this.menuItems[this.menuItemIndex].select();
     this.selected = true;
   }
 
   deselect() {
     this.menuItems[this.menuItemIndex].deselect();
+    this.menuItemIndex = 0;
     this.selected = false;
   }
 
@@ -66,6 +76,9 @@ export default class Menu extends Phaser.GameObjects.Container {
     for(let i=0; i<items.length; i++) {
       let item = items[i];
       let menu = this.addMenuItem(item.type);
+      if(item instanceof Unit) {
+        item.setMenuItem(menu);
+      }
       this.scene.add.existing(menu);
     }
 
