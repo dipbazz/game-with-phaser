@@ -9,6 +9,9 @@ export default {
     height: 240,
   },
   parent: 'content',
+  dom: {
+    createContainer: true
+  },
   zoom: 2,
   pixelArt: true,
   physics: {

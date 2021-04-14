@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import config from '../Config/config';
 
 export default class LoginScene extends Phaser.Scene {
   constructor () {
@@ -12,7 +13,7 @@ export default class LoginScene extends Phaser.Scene {
     var text = this.add.text(80, 10, 'Please login to play', { color: 'white', fontFamily: 'Arial', fontSize: '16px '});
 
     // console.log(this.add.dom)
-    let element = this.add.dom().createFromCache('loginForm');
+    let element = this.add.dom(config.scale.width/2, config.scale.height/2).createFromCache('loginForm');
     console.log(element);
 
     // element.setPerspective(800);
