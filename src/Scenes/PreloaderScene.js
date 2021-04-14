@@ -22,10 +22,13 @@ export default class PreloaderScene extends Phaser.Scene {
     this.load.spritesheet('player', 'assets/RPG_assets.png', { frameWidth: 16, frameHeight: 16 });
     this.load.image('blueDragon', 'assets/dragonblue.png');
     this.load.image('orangeDragon', 'assets/dragonorange.png');
+
+    this.load.image('blueButton1', 'assets/ui/blue_button02.png');
+    this.load.image('blueButton2', 'assets/ui/blue_button03.png');
   }
 
   create() {
-    this.scene.start('Game');
+    this.scene.start('GameOver');
   }
 
   createProgress(width, height) {
