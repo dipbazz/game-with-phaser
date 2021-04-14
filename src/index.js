@@ -10,6 +10,7 @@ import UIScene from './Scenes/UIScene';
 import GameOverScene from './Scenes/GameOverScene';
 import OptionsScene from './Scenes/OptionsScene';
 import Model from './Models/Model';
+import LeaderboardScene from './Scenes/LeaderboardScene';
 
 
 class Game extends Phaser.Game {
@@ -26,6 +27,7 @@ class Game extends Phaser.Game {
     this.scene.add('UI', UIScene);
     this.scene.add('GameOver', GameOverScene);
     this.scene.add('Options', OptionsScene);
+    this.scene.add('Leaderboard', LeaderboardScene);
 
     this.scene.start('Boot');
   }
