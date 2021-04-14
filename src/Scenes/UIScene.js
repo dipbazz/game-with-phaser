@@ -24,9 +24,6 @@ export default class UIScene extends Phaser.Scene {
     this.emitter.on('HeroSelected', this.onHeroSelected, this);
     this.emitter.on('ActionSelected', this.onActionSelected, this);
     this.emitter.on('EnemySelected', this.onEnemySelected, this);
-
-    this.message = new Message(this, this.emitter);
-    this.add.existing(this.message);
   }
 
 

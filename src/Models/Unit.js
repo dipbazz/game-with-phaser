@@ -5,6 +5,8 @@ import EventDispatcher from '../Utility/EventDispatcher';
 export default class Unit extends Phaser.GameObjects.Sprite {
   constructor(scene, x, y, texture, frame, type, hp, damage) {
     super(scene, x, y, texture, frame);
+    this.model = scene.game.globals.model;
+    this.scene = scene;
     this.type = type;
     this.hp = new HealthBar(scene, this, hp);
     this.damage = damage;

@@ -17,10 +17,10 @@ export default class TitleScene extends Phaser.Scene {
     const optionsButton = new Button(this, config.scale.width / 2, config.scale.height / 2 - 30, 'blueButton1', 'blueButton2', 'Options', 'Options');
     this.add.existing(optionsButton);
 
-    const creditButton = new Button(this, config.scale.width / 2, config.scale.height / 2 + 20, 'blueButton1', 'blueButton2', 'Credits', 'Credit');
+    const creditButton = new Button(this, config.scale.width / 2, config.scale.height / 2 + 20, 'blueButton1', 'blueButton2', 'Leaderboard', 'Leaderboard');
     this.add.existing(creditButton);
 
-    const aboutButton = new Button(this, config.scale.width / 2, config.scale.height / 2 + 70, 'blueButton1', 'blueButton2', 'About', 'About');
+    const aboutButton = new Button(this, config.scale.width / 2, config.scale.height / 2 + 70, 'blueButton1', 'blueButton2', 'About', 'Credits');
     this.add.existing(aboutButton);
 
     if(this.model.musicOn && !(this.model.bgMusicPlaying)) {

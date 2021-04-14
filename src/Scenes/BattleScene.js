@@ -2,6 +2,7 @@ import Phaser from 'phaser';
 import Enemy from '../Models/Enemy';
 import Player from '../Models/Player';
 import EventDispatcher from '../Utility/EventDispatcher';
+import Message from '../Utility/Message';
 
 export default class BattleScene extends Phaser.Scene {
   constructor() {
@@ -15,10 +16,8 @@ export default class BattleScene extends Phaser.Scene {
     this.generateCharacter();
     this.generateActions();
     this.scene.launch('UI');
-
-    this.events.on('wake', () => {
-      this.create();
-    }, this);
+    this.message = new Message(this, this.emitter);
+    this.add.existing(this.message);
   }
 
   generateCharacter() {
@@ -68,11 +67,14 @@ export default class BattleScene extends Phaser.Scene {
 
     if (aliveHeroes.length <= 0) {
       this.scene.stop('UI');
+      this.scene.stop('Game')
+      this.scene.stop('Battle');
       this.scene.start('GameOver');
     }
 
     if (aliveEnemies.length <= 0) {
       this.scene.sleep('UI');
+      this.scene.sleep('Battle');
       this.scene.switch('Game');
     }
   }
