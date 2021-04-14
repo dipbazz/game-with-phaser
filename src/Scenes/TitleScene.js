@@ -1,4 +1,6 @@
 import Phaser from 'phaser';
+import config from '../Config/config';
+import Button from '../Objects/Button';
 
 export default class TitleScene extends Phaser.Scene {
   constructor() {
@@ -6,8 +8,27 @@ export default class TitleScene extends Phaser.Scene {
   }
 
   create() {
-    console.log('creating a title scene ...');
+    this.model = this.sys.game.globals.model;
 
-    this.scene.start('Game');
+    this.cameras.main.setBackgroundColor('rgba(0, 200, 0, 0.5)');
+    const playButton = new Button(this, config.scale.width / 2, config.scale.height / 2 - 80, 'blueButton1', 'blueButton2', 'Play', 'Game');
+    this.add.existing(playButton);
+
+    const optionsButton = new Button(this, config.scale.width / 2, config.scale.height / 2 - 30, 'blueButton1', 'blueButton2', 'Options', 'Options');
+    this.add.existing(optionsButton);
+
+    const creditButton = new Button(this, config.scale.width / 2, config.scale.height / 2 + 20, 'blueButton1', 'blueButton2', 'Credits', 'Credit');
+    this.add.existing(creditButton);
+
+    const aboutButton = new Button(this, config.scale.width / 2, config.scale.height / 2 + 70, 'blueButton1', 'blueButton2', 'About', 'About');
+    this.add.existing(aboutButton);
+
+    if(this.model.musicOn && !(this.model.bgMusicPlaying)) {
+      this.model.bgMusicPlaying = true;
+      this.bgMusic = this.sound.add('bgMusic', {volume: 0.5, loop: true});
+      this.bgMusic.play();
+      this.sys.game.globals.bgMusic = this.bgMusic;
+    }
   }
+
 }
