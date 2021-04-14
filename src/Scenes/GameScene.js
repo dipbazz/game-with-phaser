@@ -31,6 +31,8 @@ export default class GameScene extends Phaser.Scene {
 
     this.spawnEnemies();
     this.physics.add.overlap(this.player, this.spawns, this.onMeetEnemy, false, this);
+    this.scene.launch('Score');
+
   }
 
   update() {

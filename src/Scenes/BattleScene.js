@@ -11,6 +11,7 @@ export default class BattleScene extends Phaser.Scene {
 
   create() {
     this.emitter = EventDispatcher.getInstance();
+    this.model = this.sys.game.globals.model;
 
     this.cameras.main.setBackgroundColor('rgba(0, 200, 0, 0.5)');
     this.generateCharacter();
@@ -18,6 +19,8 @@ export default class BattleScene extends Phaser.Scene {
     this.scene.launch('UI');
     this.message = new Message(this, this.emitter);
     this.add.existing(this.message);
+
+    this.scene.launch('Score');
   }
 
   generateCharacter() {
@@ -48,6 +51,8 @@ export default class BattleScene extends Phaser.Scene {
     }
 
     if (attacker instanceof Player) {
+      this.model.score += 10;
+      this.emitter.emit('ScoreChanged', this.model.score);
       this.scene.scene.time.addEvent({
         delay: 2000,
         callback: this.counterAttack,

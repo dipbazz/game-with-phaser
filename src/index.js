@@ -11,6 +11,8 @@ import GameOverScene from './Scenes/GameOverScene';
 import OptionsScene from './Scenes/OptionsScene';
 import Model from './Models/Model';
 import LeaderboardScene from './Scenes/LeaderboardScene';
+import ScoreScene from './Scenes/ScoreScene';
+import LoginScene from './Scenes/LoginScene';
 
 
 class Game extends Phaser.Game {
@@ -28,6 +30,8 @@ class Game extends Phaser.Game {
     this.scene.add('GameOver', GameOverScene);
     this.scene.add('Options', OptionsScene);
     this.scene.add('Leaderboard', LeaderboardScene);
+    this.scene.add('Score', ScoreScene);
+    this.scene.add('Login', LoginScene);
 
     this.scene.start('Boot');
   }
