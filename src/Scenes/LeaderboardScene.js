@@ -14,7 +14,10 @@ export default class LeaderboardScene extends Phaser.Scene {
 
     this.drawLeaderboardTitle();
     let scores = this.api.getScores()
-    scores.then(data => this.drawTop5Player(data.slice(0, 5)));
+    scores.then(data => {
+      let players = data.sort((a, b) => b.score - a.score )
+      this.drawTop5Player(players.slice(0, 5))
+    });
 
     const menuButton = new Button(this, config.scale.width / 2, config.scale.height / 2 + 80, 'blueButton1', 'blueButton2', 'Menu', 'Title');
     this.add.existing(menuButton);
@@ -45,9 +48,8 @@ export default class LeaderboardScene extends Phaser.Scene {
   }
 
   drawTop5Player (players) {
-    const sorted_players = players.sort((a, b) => b.score - a.score )
-    for (let index = 0; index < sorted_players.length; index++) {
-      const player = sorted_players[index];
+    for (let index = 0; index < players.length; index++) {
+      const player = players[index];
       this.add.text(
         config.scale.width / 2 - 70,
         config.scale.height / 2 - 70 + (index * 20),
