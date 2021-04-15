@@ -10,6 +10,15 @@ export default class LoginScene extends Phaser.Scene {
     this.model = this.sys.game.globals.model;
     this.cameras.main.setBackgroundColor('rgba(0, 200, 0, 0.5)');
 
+    if(!this.model.username) {
+      this.displayForm();
+    }else {
+      this.scene.start('Game');
+    }
+  }
+
+  displayForm() {
+
     let element = this.add.dom(config.scale.width/2, config.scale.height/2).createFromCache('loginForm');
 
     element.addListener('click');
@@ -42,10 +51,6 @@ export default class LoginScene extends Phaser.Scene {
 
       }
     });
-  }
-
-  displayForm() {
-
   }
 
 };

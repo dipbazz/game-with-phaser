@@ -9,6 +9,7 @@ export default class TitleScene extends Phaser.Scene {
 
   create() {
     this.model = this.sys.game.globals.model;
+    this.scene.stop('Score');
 
     this.cameras.main.setBackgroundColor('rgba(0, 200, 0, 0.5)');
     const playButton = new Button(this, config.scale.width / 2, config.scale.height / 2 - 80, 'blueButton1', 'blueButton2', 'Play', 'Login');

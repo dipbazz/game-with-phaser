@@ -21,16 +21,20 @@ export default class BattleScene extends Phaser.Scene {
     this.add.existing(this.message);
 
     this.scene.launch('Score');
+
+    this.events.on('wake', () => {
+      this.create();
+    })
   }
 
   generateCharacter() {
-    const blueDragon = new Enemy(this, 50, 80, 'blueDragon', 1, 'Dragon', 100, 80);
+    const blueDragon = new Enemy(this, 50, 80, 'blueDragon', 1, 'Dragon', 100, 20);
     this.add.existing(blueDragon);
 
-    const orangeDragon = new Enemy(this, 50, 130, 'orangeDragon', 1, 'Dragon2', 100, 100);
+    const orangeDragon = new Enemy(this, 50, 130, 'orangeDragon', 1, 'Dragon2', 100, 8);
     this.add.existing(orangeDragon);
 
-    const warrior = new Player(this, 250, 80, 'player', 1, 'Warrior', 100, 10);
+    const warrior = new Player(this, 250, 80, 'player', 1, 'Warrior', 100, 20);
     this.add.existing(warrior);
 
     const mage = new Player(this, 250, 130, 'player', 4, 'Mage', 80, 8);

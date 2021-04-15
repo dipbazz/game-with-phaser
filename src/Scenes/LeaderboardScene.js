@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import Leaderboard from '../API/Leaderboard';
 import config from '../Config/config';
 import Button from '../Objects/Button';
 
@@ -9,9 +10,11 @@ export default class LeaderboardScene extends Phaser.Scene {
 
   create() {
     this.cameras.main.setBackgroundColor('rgba(0, 200, 0, 0.5)');
+    this.api = new Leaderboard();
+
     this.drawLeaderboardTitle();
-    let players = [{user: 'dipesh', score: 30}, {user: 'dinesh', score: 100}]
-    this.drawTop5Player(players);
+    let scores = this.api.getScores()
+    scores.then(data => this.drawTop5Player(data.slice(0, 5)));
 
     const menuButton = new Button(this, config.scale.width / 2, config.scale.height / 2 + 80, 'blueButton1', 'blueButton2', 'Menu', 'Title');
     this.add.existing(menuButton);
@@ -42,9 +45,9 @@ export default class LeaderboardScene extends Phaser.Scene {
   }
 
   drawTop5Player (players) {
-    console.log(players);
-    for (let index = 0; index < players.length; index++) {
-      const player = players[index];
+    const sorted_players = players.sort((a, b) => b.score - a.score )
+    for (let index = 0; index < sorted_players.length; index++) {
+      const player = sorted_players[index];
       this.add.text(
         config.scale.width / 2 - 70,
         config.scale.height / 2 - 70 + (index * 20),
