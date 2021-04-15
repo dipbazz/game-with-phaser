@@ -10,7 +10,7 @@ export default {
   },
   parent: 'content',
   dom: {
-    createContainer: true
+    createContainer: true,
   },
   zoom: 2,
   pixelArt: true,

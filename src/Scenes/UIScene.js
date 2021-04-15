@@ -3,7 +3,6 @@ import ActionsMenu from '../Objects/ActionsMenu';
 import EnemiesMenu from '../Objects/EnemiesMenu';
 import HeroesMenu from '../Objects/HeroesMenu';
 import EventDispatcher from '../Utility/EventDispatcher';
-import Message from '../Utility/Message';
 
 export default class UIScene extends Phaser.Scene {
   constructor() {

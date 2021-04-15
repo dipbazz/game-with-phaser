@@ -1,49 +1,49 @@
 export default class Model {
   constructor() {
-    this._soundOn = true;
-    this._musicOn = true;
-    this._bgMusicPlaying = false;
-    this._score = 0;
-    this._username = '';
+    this.sound = true;
+    this.music = true;
+    this.bgMusic = false;
+    this.playerScore = 0;
+    this.playerUsername = '';
   }
 
   set musicOn(value) {
-    this._musicOn = value;
+    this.music = value;
   }
 
   get musicOn() {
-    return this._musicOn;
+    return this.music;
   }
 
   set score(value) {
-    this._score = value;
+    this.playerScore = value;
   }
 
   get score() {
-    return this._score;
+    return this.playerScore;
   }
 
   set username(value) {
-    this._username = value;
+    this.playerUsername = value;
   }
 
   get username() {
-    return this._username;
+    return this.playerUsername;
   }
 
   set soundOn(value) {
-    this._soundOn = value;
+    this.sound = value;
   }
 
   get soundOn() {
-    return this._soundOn;
+    return this.sound;
   }
 
   set bgMusicPlaying(value) {
-    this._bgMusicPlaying = value;
+    this.bgMusic = value;
   }
 
   get bgMusicPlaying() {
-    return this._bgMusicPlaying;
+    return this.bgMusic;
   }
 }

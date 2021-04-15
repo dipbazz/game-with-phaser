@@ -24,7 +24,7 @@ export default class BattleScene extends Phaser.Scene {
 
     this.events.on('wake', () => {
       this.create();
-    })
+    });
   }
 
   generateCharacter() {
@@ -76,7 +76,7 @@ export default class BattleScene extends Phaser.Scene {
 
     if (aliveHeroes.length <= 0) {
       this.scene.stop('UI');
-      this.scene.stop('Game')
+      this.scene.stop('Game');
       this.scene.stop('Battle');
       this.scene.start('GameOver');
     }

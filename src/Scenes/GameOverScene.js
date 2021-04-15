@@ -15,9 +15,9 @@ export default class GameOverScene extends Phaser.Scene {
     this.api.setScore(
       {
         user: this.model.username,
-        score: this.model.score
-      }
-    )
+        score: this.model.score,
+      },
+    );
     this.cameras.main.setBackgroundColor('rgba(0, 200, 0, 0.5)');
     this.scene.scene.add.text(
       config.scale.width / 2 - 80,
