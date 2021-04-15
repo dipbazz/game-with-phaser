@@ -49,7 +49,7 @@ The features of this game are:
 
 This project is hosted on netlify.
 
-[Live demo link]()
+[Live demo link](https://game-with-phaser.netlify.app/)
 
 ## Built With
 
