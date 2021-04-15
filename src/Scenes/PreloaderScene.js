@@ -34,7 +34,7 @@ export default class PreloaderScene extends Phaser.Scene {
   }
 
   create() {
-    this.scene.start('Title');
+    this.scene.start('Login');
   }
 
   createProgress(width, height) {

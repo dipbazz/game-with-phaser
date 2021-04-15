@@ -1,7 +1,7 @@
 export default class Model {
   constructor() {
     this._soundOn = true;
-    this._musicOn = true;
+    this._musicOn = false;
     this._bgMusicPlaying = false;
     this._score = 0;
     this._username = '';
@@ -21,6 +21,14 @@ export default class Model {
 
   get score() {
     return this._score;
+  }
+
+  set username(value) {
+    this._username = value;
+  }
+
+  get username() {
+    return this._username;
   }
 
   set soundOn(value) {
