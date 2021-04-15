@@ -30,7 +30,8 @@ export default class PreloaderScene extends Phaser.Scene {
     this.load.audio('bgMusic', ['assets/music/TownTheme.mp3']);
     this.load.audio('dragonAttackSound', ['assets/music/fire.wav']);
     this.load.audio('heroAttackSound', ['assets/music/attack.wav']);
-    this.load.html('loginForm', 'assets/loginForm.html');
+    this.load.html('loginForm', 'assets/html/loginForm.html');
+    this.load.html('about', 'assets/html/about.html');
   }
 
   create() {
