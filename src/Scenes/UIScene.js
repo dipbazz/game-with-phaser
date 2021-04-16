@@ -47,13 +47,21 @@ export default class UIScene extends Phaser.Scene {
   onEnemySelected(id) {
     this.currentMenu = null;
     this.selectedEnemy = id;
+
+    const aliveEnemies = this.battleScene.enemies.filter(item => item.living);
+    const aliveHeroes = this.battleScene.heroes.filter(item => item.living);
+
+    if(this.selectedEnemy >= aliveEnemies.length) {
+      this.selectedEnemy = 0;
+    }
+
     this.menus.heroesMenu.deselect();
     this.menus.actionsMenu.deselect();
     this.menus.enemiesMenu.deselect();
     this.battleScene.startBattle(
       this.battleScene.actions[this.selectedAction],
-      this.battleScene.heroes[this.selectedHero],
-      this.battleScene.enemies[this.selectedEnemy],
+      aliveHeroes[this.selectedHero],
+      aliveEnemies[this.selectedEnemy],
     );
   }
 
