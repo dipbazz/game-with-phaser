@@ -12,7 +12,7 @@ export default class Leaderboard {
     const response = fetch(
       url,
       { method: 'GET' },
-    ).then(response => response.json())
+    ).then(response => response.json());
 
     return response;
   }
