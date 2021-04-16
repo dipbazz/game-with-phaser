@@ -33,6 +33,8 @@ export default class LoginScene extends Phaser.Scene {
           error.innerHTML = 'Username cannot be blank.';
         } else if (usernamePattern.test(username.value)) {
           error.innerHTML = 'Username cannot have space character.';
+        } else if (username.value.length > 8) {
+          error.innerHTML = 'Username maximum length can only be 8.';
         } else {
           element.removeListener('click');
           this.tweens.add({
