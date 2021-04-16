@@ -13,7 +13,6 @@ export default class Leaderboard {
       url,
       { method: 'GET' },
     ).then(response => response.json())
-      .then(data => data.result);
 
     return response;
   }

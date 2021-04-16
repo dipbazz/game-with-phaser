@@ -4,7 +4,7 @@
   "description": "A game built using phaser. A fictional character should protect the villagers by defeating the monster.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "build:dev": "webpack --mode development",
     "build": "webpack --mode production",
     "start": "webpack serve --mode development"
@@ -29,6 +29,9 @@
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.1.0",
     "eslint-plugin-import": "^2.20.2",
+    "jest": "^26.6.3",
+    "jest-fetch-mock": "^3.0.3",
+    "regenerator-runtime": "^0.13.7",
     "stylelint": "^13.3.3",
     "stylelint-config-standard": "^20.0.0",
     "stylelint-csstree-validator": "^1.9.0",
@@ -39,5 +42,11 @@
   },
   "dependencies": {
     "phaser": "^3.54.0"
+  },
+  "jest": {
+    "automock": false,
+    "setupFiles": [
+      "./setupJest.js"
+    ]
   }
 }
