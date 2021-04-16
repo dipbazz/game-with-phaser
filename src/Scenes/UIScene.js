@@ -51,7 +51,7 @@ export default class UIScene extends Phaser.Scene {
     const aliveEnemies = this.battleScene.enemies.filter(item => item.living);
     const aliveHeroes = this.battleScene.heroes.filter(item => item.living);
 
-    if(this.selectedEnemy >= aliveEnemies.length) {
+    if (this.selectedEnemy >= aliveEnemies.length) {
       this.selectedEnemy = 0;
     }
 
